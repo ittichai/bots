@@ -2,6 +2,18 @@
 var restify = require('restify'); 
 var builder = require('botbuilder'); 
 
+//====================
+var username; 
+var quiz = require('./api.js');
+var index = 0;
+
+(function () {
+    if (username)
+        quiz.GetSets(username);   // I will invoke myself
+})();
+
+//====================
+
 // Setup Restify Server
 var server = restify.createServer();
 server.listen(process.env.PORT || 3978, function() 

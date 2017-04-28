@@ -23,3 +23,23 @@
                 }
             })
     }
+
+       exports.GetTerms = function (key, callback) {
+        request.get({
+            uri: 'https://api.quizlet.com/2.0/sets/' + table[key] + '?client_id=<ENTER CLIENT ID here>',
+        },
+            function (error, response, body) {
+                if (error)
+                    console.log(error);
+                else {
+                    body = JSON.parse(body);
+                    for (var x = 0; x < body.terms.length; x++) {
+                        terms.push(body.terms[x].term)
+                        def.push(body.terms[x].definition);
+                    }
+                    console.log('Got terms');
+                    exports.Terms = terms;
+                    exports.Def = def;
+                }
+            })
+    }
